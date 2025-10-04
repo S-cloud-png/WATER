@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Water ATM</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f0f9ff; }
+    header { 
+      background: url('https://images.pexels.com/photos/671557/pexels-photo-671557.jpeg?auto=compress&cs=tinysrgb&w=1400') no-repeat center center/cover;
+      color: white; 
+      text-align: center; 
+      padding: 80px 20px; 
+    }
+    header h1 { font-size: 3em; margin: 0; }
+    header p { font-size: 1.2em; }
+    nav { background: #023e8a; text-align: center; padding: 12px; }
+    nav a { color: white; margin: 0 20px; text-decoration: none; font-weight: bold; cursor: pointer; font-size: 18px; }
+    nav a:hover { color: #90e0ef; }
+    section { padding: 40px 20px; text-align: center; display: none; }
+    section.active { display: block; }
+    h2 { color: #0077b6; }
+
+    /* Slideshow */
+    .slideshow-container { position: relative; max-width: 80%; margin: auto; }
+    .slides { display: none; }
+    .slides img { width: 100%; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+    .fade { animation: fadeEffect 1.5s; }
+    @keyframes fadeEffect { from {opacity: .4} to {opacity: 1} }
+
+    /* Dots */
+    .dots { text-align: center; margin-top: 10px; }
+    .dot { height: 12px; width: 12px; margin: 0 4px; background-color: #bbb; border-radius: 50%; display: inline-block; cursor: pointer; }
+    .active-dot { background-color: #0077b6; }
+
+    /* About images */
+    .about-img { width: 250px; border-radius: 12px; margin: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+
+    /* Contact form */
+    form { background: white; padding: 25px; border-radius: 10px; display: inline-block; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+    input, textarea { width: 100%; margin: 10px 0; padding: 12px; border-radius: 5px; border: 1px solid #ccc; }
+    button { background: #0077b6; color: white; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+    button:hover { background: #023e8a; }
+
+    footer { background: #0077b6; color: white; text-align: center; padding: 15px; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>💧 Water ATM</h1>
+    <p>Safe Drinking Water for Everyone</p>
+  </header>
+
+  <nav>
+    <a onclick="showPage('home')">Home</a>
+    <a onclick="showPage('about')">About</a>
+    <a onclick="showPage('contact')">Contact</a>
+  </nav>
+
+  <!-- Home Section with Slideshow -->
+  <section id="home" class="active">
+    <h2>Welcome</h2>
+    <p>Water ATM provides 24/7 clean and affordable drinking water through automated kiosks.</p>
+
+    <div class="slideshow-container">
+      <div class="slides fade">
+        <img src="https://picsum.photos/1000/500?random=1" alt="Water ATM">
+      </div>
+      <div class="slides fade">
+        <img src="https://picsum.photos/1000/500?random=2" alt="Clean Water">
+      </div>
+      <div class="slides fade">
+        <img src="https://picsum.photos/1000/500?random=3" alt="Sustainable Water">
+      </div>
+    </div>
+    <div class="dots">
+      <span class="dot"></span> 
+      <span class="dot"></span> 
+      <span class="dot"></span> 
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <h2>About Water ATM</h2>
+    <p>A Water ATM is an automated water dispensing machine that provides clean and affordable water anytime using coins or smart cards.</p>
+    <div>
+      <img class="about-img" src="https://picsum.photos/300/200?random=4" alt="Clean Water">
+      <img class="about-img" src="https://picsum.photos/300/200?random=5" alt="Water Saving">
+      <img class="about-img" src="https://picsum.photos/300/200?random=6" alt="ATM Machine">
+    </div>
+    <h2>Benefits</h2>
+    <ul style="list-style: none; font-size: 18px; padding:0;">
+      <li>✔ 24/7 access to purified water</li>
+      <li>✔ Affordable and easy to use</li>
+      <li>✔ Promotes eco-friendly practices</li>
+    </ul>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Get in Touch</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea rows="4" placeholder="Your Message"></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Water ATM Project | Designed for University</p>
+  </footer>
+
+  <script>
+    // Navigation switching
+    function showPage(pageId) {
+      let sections = document.querySelectorAll("section");
+      sections.forEach(sec => sec.classList.remove("active"));
+      document.getElementById(pageId).classList.add("active");
+    }
+
+    // Slideshow functionality
+    let slideIndex = 0;
+    let slides = document.getElementsByClassName("slides");
+    let dots = document.getElementsByClassName("dot");
+
+    function showSlides() {
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+      }
+      slideIndex++;
+      if (slideIndex > slides.length) {slideIndex = 1}    
+      for (let i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active-dot", "");
+      }
+      slides[slideIndex-1].style.display = "block";  
+      dots[slideIndex-1].className += " active-dot";
+      setTimeout(showSlides, 3000); // Change image every 3 seconds
+    }
+    showSlides();
+  </script>
+</body>
+</html>
